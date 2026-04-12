@@ -34,6 +34,20 @@ export default function LandingPage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (settings) {
+      if (settings.site_name) {
+        document.title = settings.site_name;
+      }
+      if (settings.logo_url) {
+        const favicon = document.getElementById("favicon") as HTMLLinkElement;
+        if (favicon) {
+          favicon.href = settings.logo_url;
+        }
+      }
+    }
+  }, [settings]);
+
   const featuredTestimonials = testimonials.filter(t => t.is_featured);
   const otherTestimonials = testimonials.filter(t => !t.is_featured);
 
@@ -42,22 +56,22 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
             {loading ? (
-              <div className="flex items-center gap-3">
-                <Skeleton className="w-10 h-10 rounded-xl" />
-                <Skeleton className="h-6 w-24 md:w-32" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Skeleton className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl" />
+                <Skeleton className="h-5 sm:h-6 w-20 sm:w-32" />
               </div>
             ) : (
               <>
                 {settings?.logo_url ? (
-                  <img src={settings.logo_url} alt={settings.site_name} className="h-10 w-auto object-contain" />
+                  <img src={settings.logo_url} alt={settings.site_name} className="h-8 sm:h-10 w-auto object-contain" />
                 ) : (
-                  <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-lg sm:text-xl shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
                     {settings?.site_name?.charAt(0) || "T"}
                   </div>
                 )}
-                <span className="text-xl font-bold text-primary tracking-tight">
+                <span className="text-lg sm:text-xl font-bold text-primary tracking-tight truncate max-w-[120px] sm:max-w-none">
                   {settings?.site_name || "রিভিউ হাব"}
                 </span>
               </>
@@ -81,10 +95,10 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-primary mb-6">
               ক্লাইন্টরা <span className="text-secondary">যা বলছেন</span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-10 font-medium">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 font-medium px-4">
               আমাদের কাজের মান নিয়ে ক্লায়েন্টদের মতামত
             </p>
             <div className="flex justify-center gap-4">

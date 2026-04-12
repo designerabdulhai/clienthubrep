@@ -25,7 +25,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
           <p className="text-white/80 text-lg">আপনার কোনো প্রশ্ন থাকলে বা সাহায্যের দরকার হলে আমাদের সাথে যোগাযোগ করতে পারেন।</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {contactItems.map((item, index) => (
             <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/10 hover:bg-white/15 transition-colors border border-white/10">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 shadow-lg shadow-secondary/20">

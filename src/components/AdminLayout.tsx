@@ -38,7 +38,18 @@ export default function AdminLayout() {
 
       try {
         const { data: settingsData } = await supabase.from("settings").select("*").single();
-        if (settingsData) setSettings(settingsData);
+        if (settingsData) {
+          setSettings(settingsData);
+          if (settingsData.site_name) {
+            document.title = `${settingsData.site_name} - অ্যাডমিন`;
+          }
+          if (settingsData.logo_url) {
+            const favicon = document.getElementById("favicon") as HTMLLinkElement;
+            if (favicon) {
+              favicon.href = settingsData.logo_url;
+            }
+          }
+        }
       } catch (error) {
         console.error("Error fetching settings:", error);
       }
@@ -143,9 +154,9 @@ export default function AdminLayout() {
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsSidebarOpen(true)}>
               <Menu className="w-6 h-6" />
             </Button>
-            <div className="lg:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-2 min-w-0">
               {settings?.logo_url && (
-                <img src={settings.logo_url} alt={settings.site_name} className="h-6 w-auto object-contain" />
+                <img src={settings.logo_url} alt={settings.site_name} className="h-6 w-auto object-contain flex-shrink-0" />
               )}
               <span className="font-bold text-primary truncate">
                 {settings?.site_name || "অ্যাডমিন প্যানেল"}
