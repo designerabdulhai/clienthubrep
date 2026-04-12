@@ -14,7 +14,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const getYoutubeId = (url: string) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   };
@@ -31,7 +31,28 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
         transition={{ duration: 0.5 }}
       >
         <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300 border-neutral-200">
-          {testimonial.video_url && (
+          {testimonial.thumbnail_url && (
+            <div 
+              className={`relative aspect-video overflow-hidden ${testimonial.video_url ? 'cursor-pointer group' : ''}`}
+              onClick={() => testimonial.video_url && setIsVideoOpen(true)}
+            >
+              <img
+                src={testimonial.thumbnail_url}
+                alt={testimonial.client_name}
+                className={`w-full h-full object-cover transition-transform duration-500 ${testimonial.video_url ? 'group-hover:scale-105' : ''}`}
+                referrerPolicy="no-referrer"
+              />
+              {testimonial.video_url && (
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
+                    <Play className="w-6 h-6 text-secondary fill-secondary ml-1" />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          
+          {!testimonial.thumbnail_url && testimonial.video_url && (
             <div 
               className="relative aspect-video cursor-pointer group overflow-hidden"
               onClick={() => setIsVideoOpen(true)}
