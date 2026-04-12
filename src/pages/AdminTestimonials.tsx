@@ -76,7 +76,7 @@ export default function AdminTestimonials() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-primary">রিভিউ</h1>
-          <p className="text-neutral-500">ক্লাইন্টের রিভিউগুলো এখান থেকে ম্যানেজ করুন।</p>
+          <p className="text-muted-foreground">ক্লাইন্টের রিভিউগুলো এখান থেকে ম্যানেজ করুন।</p>
         </div>
         
         <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
@@ -96,13 +96,13 @@ export default function AdminTestimonials() {
         </Dialog>
       </div>
 
-      <Card className="border-neutral-200 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
+      <Card className="border-border shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-border bg-muted/30">
           <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
             <Input 
               placeholder="নাম বা পরিচয় দিয়ে খুঁজুন..." 
-              className="pl-10 bg-white"
+              className="pl-10 bg-background"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -124,18 +124,18 @@ export default function AdminTestimonials() {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-neutral-400">অপেক্ষা করুন...</TableCell>
+                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">অপেক্ষা করুন...</TableCell>
                 </TableRow>
               ) : filteredTestimonials.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-neutral-400">কোনো রিভিউ পাওয়া যায়নি।</TableCell>
+                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">কোনো রিভিউ পাওয়া যায়নি।</TableCell>
                 </TableRow>
               ) : (
                 filteredTestimonials.map((t) => (
                   <TableRow key={t.id}>
                     <TableCell>
                       <div className="font-medium text-primary">{t.client_name}</div>
-                      <div className="text-xs text-neutral-500">{t.client_title}</div>
+                      <div className="text-xs text-muted-foreground">{t.client_title}</div>
                     </TableCell>
                     <TableCell>
                       <RatingStars rating={t.rating} />
@@ -146,7 +146,7 @@ export default function AdminTestimonials() {
                           <Video className="w-3 h-3" /> ভিডিও
                         </div>
                       ) : (
-                        <div className="text-neutral-400 text-xs">শুধুমাত্র টেক্সট</div>
+                        <div className="text-muted-foreground text-xs">শুধুমাত্র টেক্সট</div>
                       )}
                     </TableCell>
                     <TableCell>
@@ -155,16 +155,16 @@ export default function AdminTestimonials() {
                           সেরা
                         </div>
                       ) : (
-                        <span className="text-neutral-300">-</span>
+                        <span className="text-muted-foreground/30">-</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-xs text-neutral-500">
+                    <TableCell className="text-xs text-muted-foreground">
                       {new Date(t.created_at).toLocaleDateString()}
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Dialog>
-                          <DialogTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-primary" />}>
+                          <DialogTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary" />}>
                             <Pencil className="w-4 h-4" />
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
@@ -182,7 +182,7 @@ export default function AdminTestimonials() {
                         <Button 
                           variant="ghost" 
                           size="icon" 
-                          className="h-8 w-8 text-neutral-400 hover:text-red-500"
+                          className="h-8 w-8 text-muted-foreground/60 hover:text-red-500"
                           onClick={() => handleDelete(t.id)}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -202,5 +202,5 @@ export default function AdminTestimonials() {
 
 // Helper Card component for the table
 function Card({ children, className }: { children: React.ReactNode, className?: string }) {
-  return <div className={`bg-white rounded-2xl border ${className}`}>{children}</div>;
+  return <div className={`bg-card rounded-2xl border ${className}`}>{children}</div>;
 }

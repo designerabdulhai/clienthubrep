@@ -43,16 +43,25 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
-            {settings?.logo_url ? (
-              <img src={settings.logo_url} alt={settings.site_name} className="h-10 w-auto object-contain" />
-            ) : (
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
-                {settings?.site_name?.charAt(0) || "T"}
+            {loading ? (
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-10 h-10 rounded-xl" />
+                <Skeleton className="h-6 w-24 md:w-32" />
               </div>
+            ) : (
+              <>
+                {settings?.logo_url ? (
+                  <img src={settings.logo_url} alt={settings.site_name} className="h-10 w-auto object-contain" />
+                ) : (
+                  <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                    {settings?.site_name?.charAt(0) || "T"}
+                  </div>
+                )}
+                <span className="text-xl font-bold text-primary tracking-tight">
+                  {settings?.site_name || "রিভিউ হাব"}
+                </span>
+              </>
             )}
-            <span className="text-xl font-bold text-primary tracking-tight">
-              {settings?.site_name || "রিভিউ হাব"}
-            </span>
           </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
@@ -76,7 +85,7 @@ export default function LandingPage() {
               ক্লাইন্টরা <span className="text-secondary">যা বলছেন</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed mb-10 font-medium">
-              সরাসরি ক্লাইন্টের কাছ থেকে শুনুন। আমি কীভাবে তাদের সাহায্য করেছি তা জেনে নিন।
+              আমাদের কাজের মান নিয়ে ক্লায়েন্টদের মতামত
             </p>
             <div className="flex justify-center gap-4">
               <a href="#testimonials" className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-colors shadow-lg shadow-primary/20">
@@ -153,7 +162,13 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-12 border-t border-border text-center text-muted-foreground text-sm">
         <div className="container mx-auto px-4">
-          <p className="mb-4">© {new Date().getFullYear()} {settings?.site_name || "রিভিউ হাব"}। সব অধিকার সংরক্ষিত।</p>
+          {loading ? (
+            <div className="flex flex-col items-center gap-2 mb-4">
+              <Skeleton className="h-4 w-48" />
+            </div>
+          ) : (
+            <p className="mb-4">© {new Date().getFullYear()} {settings?.site_name || "রিভিউ হাব"}। সব অধিকার সংরক্ষিত।</p>
+          )}
           <Link 
             to="/admin/login" 
             className="text-muted-foreground hover:text-primary dark:hover:text-secondary transition-colors inline-flex items-center gap-2 font-medium"

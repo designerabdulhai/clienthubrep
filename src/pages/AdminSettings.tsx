@@ -129,10 +129,10 @@ export default function AdminSettings() {
     <div className="max-w-3xl space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-primary">সেটিংস</h1>
-        <p className="text-neutral-500">আপনার কন্টাক্ট ইনফো এবং সোশ্যাল লিঙ্কগুলো এখানে আপডেট করুন।</p>
+        <p className="text-muted-foreground">আপনার কন্টাক্ট ইনফো এবং সোশ্যাল লিঙ্কগুলো এখানে আপডেট করুন।</p>
       </div>
 
-      <Card className="border-neutral-200 shadow-sm">
+      <Card className="border-border shadow-sm">
         <CardHeader>
           <CardTitle>সাইটের নাম ও লোগো</CardTitle>
           <CardDescription>আপনার সাইটের নাম এবং লোগো এখানে দিন।</CardDescription>
@@ -166,14 +166,14 @@ export default function AdminSettings() {
                     {uploading && <Loader2 className="animate-spin" />}
                   </div>
                   {form.watch('logo_url') && (
-                    <div className="mt-2 p-2 border rounded-lg bg-neutral-50 inline-block">
+                    <div className="mt-2 p-2 border rounded-lg bg-muted/50 inline-block">
                       <img src={form.watch('logo_url')} alt="Logo Preview" className="h-12 object-contain" />
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="space-y-6 pt-4 border-t border-neutral-100">
+              <div className="space-y-6 pt-4 border-t border-border">
                 <h3 className="text-sm font-semibold text-primary">যোগাযোগের তথ্য</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
@@ -235,7 +235,7 @@ export default function AdminSettings() {
                 />
               </div>
 
-              <div className="space-y-6 pt-4 border-t border-neutral-100">
+              <div className="space-y-6 pt-4 border-t border-border">
                 <h3 className="text-sm font-semibold text-primary">সোশ্যাল লিঙ্ক</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField

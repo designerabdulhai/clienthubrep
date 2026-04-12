@@ -62,7 +62,7 @@ export default function AdminLayout() {
   if (loading) return <div className="min-h-screen flex items-center justify-center">একটু অপেক্ষা করুন...</div>;
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex">
+    <div className="min-h-screen bg-background flex">
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div 

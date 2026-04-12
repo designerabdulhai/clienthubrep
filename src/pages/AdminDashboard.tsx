@@ -59,14 +59,14 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-primary">এক নজরে ড্যাশবোর্ড</h1>
-        <p className="text-neutral-500">স্বাগতম! আপনার সাইটের বর্তমান অবস্থা দেখে নিন।</p>
+        <p className="text-muted-foreground">স্বাগতম! আপনার সাইটের বর্তমান অবস্থা দেখে নিন।</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat, i) => (
-          <Card key={i} className="border-neutral-200 shadow-sm">
+          <Card key={i} className="border-border shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-neutral-500">{stat.title}</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
               <stat.icon className={`w-4 h-4 ${stat.color}`} />
             </CardHeader>
             <CardContent>
@@ -77,23 +77,29 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="border-neutral-200 shadow-sm">
+        <Card className="border-border shadow-sm">
           <CardHeader>
             <CardTitle>রেটিং চার্ট</CardTitle>
           </CardHeader>
           <CardContent className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={ratingData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" strokeOpacity={0.1} />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: 'currentColor', opacity: 0.5 }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: 'currentColor', opacity: 0.5 }} />
                 <Tooltip 
-                  cursor={{ fill: '#f9f9f9' }}
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
+                  cursor={{ fill: 'currentColor', fillOpacity: 0.05 }}
+                  contentStyle={{ 
+                    borderRadius: '12px', 
+                    border: '1px solid var(--border)', 
+                    backgroundColor: 'var(--card)',
+                    color: 'var(--foreground)',
+                    boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' 
+                  }}
                 />
                 <Bar dataKey="count" radius={[4, 4, 0, 0]}>
                   {ratingData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.star === 5 ? '#f05a25' : '#042952'} />
+                    <Cell key={`cell-${index}`} fill={entry.star === 5 ? 'var(--secondary)' : 'var(--primary)'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -101,22 +107,22 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border-neutral-200 shadow-sm">
+        <Card className="border-border shadow-sm">
           <CardHeader>
             <CardTitle>কিছু দরকারি টিপস</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-100">
+            <div className="p-4 rounded-xl bg-muted/30 border border-border/50">
               <p className="text-sm font-medium text-primary mb-1">ভিডিও রিভিউ বেশি কার্যকর</p>
-              <p className="text-xs text-neutral-500 leading-relaxed">ভিডিও রিভিউগুলো সাধারণ টেক্সটের চেয়ে অনেক বেশি কাজে দেয়। তাই ক্লাইন্টের কাছ থেকে ভিডিও ফিডব্যাক নেওয়ার চেষ্টা করুন।</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">ভিডিও রিভিউগুলো সাধারণ টেক্সটের চেয়ে অনেক বেশি কাজে দেয়। তাই ক্লাইন্টের কাছ থেকে ভিডিও ফিডব্যাক নেওয়ার চেষ্টা করুন।</p>
             </div>
-            <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-100">
+            <div className="p-4 rounded-xl bg-muted/30 border border-border/50">
               <p className="text-sm font-medium text-primary mb-1">সেরা রিভিউগুলো উপরে রাখুন</p>
-              <p className="text-xs text-neutral-500 leading-relaxed">সবচেয়ে ভালো রিভিউগুলো 'সেরা' হিসেবে মার্ক করুন, এগুলো ল্যান্ডিং পেজের একদম উপরে দেখাবে।</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">সবচেয়ে ভালো রিভিউগুলো 'সেরা' হিসেবে মার্ক করুন, এগুলো ল্যান্ডিং পেজের একদম উপরে দেখাবে।</p>
             </div>
-            <div className="p-4 rounded-xl bg-neutral-50 border border-neutral-100">
+            <div className="p-4 rounded-xl bg-muted/30 border border-border/50">
               <p className="text-sm font-medium text-primary mb-1">নিয়মিত নতুন রিভিউ যোগ করুন</p>
-              <p className="text-xs text-neutral-500 leading-relaxed">নিয়মিত নতুন রিভিউ যোগ করলে ক্লাইন্টের বিশ্বাস বাড়ে।</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">নিয়মিত নতুন রিভিউ যোগ করলে ক্লাইন্টের বিশ্বাস বাড়ে।</p>
             </div>
           </CardContent>
         </Card>
