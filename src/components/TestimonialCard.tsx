@@ -1,0 +1,85 @@
+import { useState } from "react";
+import { Play, Quote } from "lucide-react";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { RatingStars } from "./RatingStars";
+import { VideoModal } from "./VideoModal";
+import { Testimonial } from "@/types";
+import { motion } from "motion/react";
+
+interface TestimonialCardProps {
+  testimonial: Testimonial;
+}
+
+export function TestimonialCard({ testimonial }: TestimonialCardProps) {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  const getYoutubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const youtubeId = testimonial.video_url ? getYoutubeId(testimonial.video_url) : null;
+  const thumbnailUrl = testimonial.thumbnail_url || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : "https://picsum.photos/seed/video/800/450");
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300 border-neutral-200">
+          {testimonial.video_url && (
+            <div 
+              className="relative aspect-video cursor-pointer group overflow-hidden"
+              onClick={() => setIsVideoOpen(true)}
+            >
+              <img
+                src={thumbnailUrl}
+                alt={testimonial.client_name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
+                  <Play className="w-6 h-6 text-secondary fill-secondary ml-1" />
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-start">
+              <RatingStars rating={testimonial.rating} />
+              <Quote className="w-8 h-8 text-secondary/20 fill-secondary/20" />
+            </div>
+          </CardHeader>
+          
+          <CardContent className="flex-grow">
+            <p className="text-foreground/90 italic leading-relaxed font-medium">
+              "{testimonial.review_text}"
+            </p>
+          </CardContent>
+          
+          <CardFooter className="pt-4 border-t border-border/50 bg-muted/30">
+            <div>
+              <p className="font-bold text-primary dark:text-white">{testimonial.client_name}</p>
+              <p className="text-sm text-muted-foreground font-medium">{testimonial.client_title}</p>
+            </div>
+          </CardFooter>
+        </Card>
+      </motion.div>
+
+      {testimonial.video_url && (
+        <VideoModal
+          isOpen={isVideoOpen}
+          onClose={() => setIsVideoOpen(false)}
+          videoUrl={testimonial.video_url}
+          title={`${testimonial.client_name}-এর ভিডিও প্রশংসাপত্র`}
+        />
+      )}
+    </>
+  );
+}
