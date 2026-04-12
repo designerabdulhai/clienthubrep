@@ -158,7 +158,7 @@ export default function AdminLayout() {
               {settings?.logo_url && (
                 <img src={settings.logo_url} alt={settings.site_name} className="h-6 w-auto object-contain flex-shrink-0" />
               )}
-              <span className="font-bold text-primary truncate">
+              <span className="font-bold text-primary">
                 {settings?.site_name || "অ্যাডমিন প্যানেল"}
               </span>
             </div>

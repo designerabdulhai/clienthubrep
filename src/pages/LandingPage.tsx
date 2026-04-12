@@ -71,7 +71,7 @@ export default function LandingPage() {
                     {settings?.site_name?.charAt(0) || "T"}
                   </div>
                 )}
-                <span className="text-lg sm:text-xl font-bold text-primary tracking-tight truncate max-w-[120px] sm:max-w-none">
+                <span className="text-lg sm:text-xl font-bold text-primary tracking-tight">
                   {settings?.site_name || "রিভিউ হাব"}
                 </span>
               </>
@@ -101,11 +101,11 @@ export default function LandingPage() {
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 font-medium px-4">
               আমাদের কাজের মান নিয়ে ক্লায়েন্টদের মতামত
             </p>
-            <div className="flex justify-center gap-4">
-              <a href="#testimonials" className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-colors shadow-lg shadow-primary/20">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 px-4">
+              <a href="#testimonials" className="px-6 py-3 sm:px-8 sm:py-4 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-colors shadow-lg shadow-primary/20 text-sm sm:text-base whitespace-nowrap">
                 রিভিউগুলো দেখুন
               </a>
-              <a href="#contact" className="px-8 py-4 border border-border text-primary rounded-full font-medium hover:bg-muted transition-colors">
+              <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 border border-border text-primary rounded-full font-medium hover:bg-muted transition-colors text-sm sm:text-base whitespace-nowrap">
                 যোগাযোগ করুন
               </a>
             </div>
