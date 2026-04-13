@@ -8,6 +8,7 @@ CREATE TABLE testimonials (
   video_url TEXT,
   thumbnail_url TEXT,
   is_featured BOOLEAN DEFAULT false,
+  section TEXT DEFAULT 'client_feedback',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

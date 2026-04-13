@@ -26,6 +26,7 @@ const formSchema = z.object({
   review_text: z.string().min(10, "Review must be at least 10 characters"),
   rating: z.number().min(1).max(5),
   is_featured: z.boolean().default(false),
+  section: z.string().default("client_feedback"),
   video_url: z.string().optional(),
   thumbnail_url: z.string().optional(),
 });
@@ -49,6 +50,7 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
       review_text: initialData.review_text,
       rating: initialData.rating,
       is_featured: initialData.is_featured,
+      section: initialData.section || "client_feedback",
       video_url: initialData.video_url || "",
       thumbnail_url: initialData.thumbnail_url || "",
     } : {
@@ -57,6 +59,7 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
       review_text: "",
       rating: 5,
       is_featured: false,
+      section: "client_feedback",
       video_url: "",
       thumbnail_url: "",
     },
@@ -200,9 +203,30 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
           />
           <FormField
             control={form.control}
-            name="is_featured"
+            name="section"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+              <FormItem>
+                <FormLabel>সেকশন সিলেক্ট করুন</FormLabel>
+                <FormControl>
+                  <select 
+                    {...field}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="client_feedback">Client Feedback</option>
+                    <option value="site_visit">Site Visit and Supervision</option>
+                  </select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <FormField
+          control={form.control}
+          name="is_featured"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                 <div className="space-y-0.5">
                   <FormLabel>সেরা (উপরে দেখাবে)</FormLabel>
                   <FormDescription>
@@ -218,7 +242,6 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
               </FormItem>
             )}
           />
-        </div>
 
         <div className="space-y-4 border rounded-lg p-4 bg-neutral-50/50">
           <FormLabel className="text-base text-primary">ভিডিও</FormLabel>

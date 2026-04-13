@@ -18,9 +18,9 @@ export function ContactSection({ settings }: ContactSectionProps) {
   ].filter(item => item.href || item.value);
 
   return (
-    <section id="contact" className="py-24 bg-primary text-white">
+    <section id="contact" className="py-12 bg-primary text-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="max-w-4xl mx-auto text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">যোগাযোগ করুন</h2>
           <p className="text-white/80 text-lg">আপনার কোনো প্রশ্ন থাকলে বা সাহায্যের দরকার হলে আমাদের সাথে যোগাযোগ করতে পারেন।</p>
         </div>

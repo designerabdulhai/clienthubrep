@@ -7,6 +7,7 @@ export interface Testimonial {
   video_url: string | null;
   thumbnail_url: string | null;
   is_featured: boolean;
+  section: string;
   created_at: string;
 }
 

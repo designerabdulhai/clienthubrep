@@ -49,7 +49,8 @@ export default function LandingPage() {
   }, [settings]);
 
   const featuredTestimonials = testimonials.filter(t => t.is_featured);
-  const otherTestimonials = testimonials.filter(t => !t.is_featured);
+  const clientFeedbackTestimonials = testimonials.filter(t => !t.is_featured && (t.section === 'client_feedback' || !t.section));
+  const siteVisitTestimonials = testimonials.filter(t => !t.is_featured && t.section === 'site_visit');
 
   return (
     <div className="min-h-screen bg-background">
@@ -87,7 +88,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,7 +122,7 @@ export default function LandingPage() {
 
       {/* Featured Section */}
       {featuredTestimonials.length > 0 && (
-        <section id="featured" className="py-24 bg-muted/30">
+        <section id="featured" className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-primary uppercase tracking-widest mb-2">সেরা রিভিউ</h2>
@@ -137,7 +138,7 @@ export default function LandingPage() {
       )}
 
       {/* All Testimonials Grid */}
-      <section id="testimonials" className="py-24">
+      <section id="testimonials" className="py-12">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-primary mb-4">Client Feedback</h2>
@@ -156,7 +157,7 @@ export default function LandingPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherTestimonials.map((t) => (
+              {clientFeedbackTestimonials.map((t) => (
                 <TestimonialCard key={t.id} testimonial={t as Testimonial} />
               ))}
             </div>
@@ -170,11 +171,29 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Site Visit and Supervision Section */}
+      {!loading && siteVisitTestimonials.length > 0 && (
+        <section id="site-visit" className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl font-bold text-primary mb-4">Site Visit and Supervision</h2>
+              <p className="text-muted-foreground">সাইট ভিজিট এবং সুপারভিশন সংক্রান্ত কিছু রিভিউ।</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {siteVisitTestimonials.map((t) => (
+                <TestimonialCard key={t.id} testimonial={t as Testimonial} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Contact Section */}
       <ContactSection settings={settings} />
       
       {/* Footer */}
-      <footer className="py-12 border-t border-border text-center text-muted-foreground text-sm">
+      <footer className="py-6 border-t border-border text-center text-muted-foreground text-sm">
         <div className="container mx-auto px-4">
           {loading ? (
             <div className="flex flex-col items-center gap-2 mb-4">

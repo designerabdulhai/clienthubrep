@@ -117,6 +117,7 @@ export default function AdminTestimonials() {
                 <TableHead>রেটিং</TableHead>
                 <TableHead>ধরন</TableHead>
                 <TableHead>সেরা</TableHead>
+                <TableHead>সেকশন</TableHead>
                 <TableHead>তারিখ</TableHead>
                 <TableHead className="text-right">কাজ</TableHead>
               </TableRow>
@@ -124,11 +125,11 @@ export default function AdminTestimonials() {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">অপেক্ষা করুন...</TableCell>
+                  <TableCell colSpan={7} className="text-center py-10 text-muted-foreground">অপেক্ষা করুন...</TableCell>
                 </TableRow>
               ) : filteredTestimonials.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">কোনো রিভিউ পাওয়া যায়নি।</TableCell>
+                  <TableCell colSpan={7} className="text-center py-10 text-muted-foreground">কোনো রিভিউ পাওয়া যায়নি।</TableCell>
                 </TableRow>
               ) : (
                 filteredTestimonials.map((t) => (
@@ -157,6 +158,11 @@ export default function AdminTestimonials() {
                       ) : (
                         <span className="text-muted-foreground/30">-</span>
                       )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-xs font-medium text-primary">
+                        {t.section === 'site_visit' ? 'Site Visit' : 'Client Feedback'}
+                      </div>
                     </TableCell>
                     <TableCell className="text-xs text-muted-foreground">
                       {new Date(t.created_at).toLocaleDateString()}
