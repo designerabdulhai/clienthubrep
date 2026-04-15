@@ -37,10 +37,15 @@ export function WhatsAppButton() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors group"
+        className="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors group p-3"
         aria-label="Contact on WhatsApp"
       >
-        <MessageSquare className="w-7 h-7 fill-current" />
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+          alt="WhatsApp" 
+          className="w-full h-full object-contain"
+          referrerPolicy="no-referrer"
+        />
         
         {/* Tooltip */}
         <span className="absolute right-full mr-4 px-3 py-1 bg-black/80 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
