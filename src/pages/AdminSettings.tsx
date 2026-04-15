@@ -27,6 +27,9 @@ const formSchema = z.object({
   whatsapp: z.string().optional(),
   facebook: z.string().url("Invalid URL").or(z.literal("")).optional(),
   youtube: z.string().url("Invalid URL").or(z.literal("")).optional(),
+  website: z.string().url("Invalid URL").or(z.literal("")).optional(),
+  website_2: z.string().url("Invalid URL").or(z.literal("")).optional(),
+  website_3: z.string().url("Invalid URL").or(z.literal("")).optional(),
   address: z.string().optional(),
 });
 
@@ -47,6 +50,9 @@ export default function AdminSettings() {
       whatsapp: "",
       facebook: "",
       youtube: "",
+      website: "",
+      website_2: "",
+      website_3: "",
       address: "",
     },
   });
@@ -63,6 +69,9 @@ export default function AdminSettings() {
           whatsapp: data.whatsapp || "",
           facebook: data.facebook || "",
           youtube: data.youtube || "",
+          website: data.website || "",
+          website_2: data.website_2 || "",
+          website_3: data.website_3 || "",
           address: data.address || "",
         });
       }
@@ -259,6 +268,45 @@ export default function AdminSettings() {
                         <FormLabel>ইউটিউব ইউআরএল</FormLabel>
                         <FormControl>
                           <Input placeholder="https://youtube.com/@yourchannel" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ওয়েবসাইট ইউআরএল ১</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://yourwebsite.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="website_2"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ওয়েবসাইট ইউআরএল ২</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://anotherwebsite.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="website_3"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ওয়েবসাইট ইউআরএল ৩</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://thirdwebsite.com" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

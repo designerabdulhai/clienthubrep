@@ -8,6 +8,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "motion/react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Globe, Youtube, Phone } from "lucide-react";
 
 export default function LandingPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -81,6 +82,16 @@ export default function LandingPage() {
           </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
+            {settings?.website && (
+              <a 
+                href={settings.website} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hidden md:block px-6 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-md shadow-primary/10"
+              >
+                ওয়েবসাইট
+              </a>
+            )}
             <a href="#contact" className="hidden md:block px-6 py-2 bg-secondary text-white rounded-full text-sm font-medium hover:bg-secondary/90 transition-colors shadow-md shadow-secondary/10">
               যোগাযোগ করুন
             </a>
@@ -107,9 +118,59 @@ export default function LandingPage() {
               <a href="#testimonials" className="px-6 py-3 sm:px-8 sm:py-4 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-colors shadow-lg shadow-primary/20 text-sm sm:text-base whitespace-nowrap">
                 রিভিউগুলো দেখুন
               </a>
-              <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 border border-border text-primary rounded-full font-medium hover:bg-muted transition-colors text-sm sm:text-base whitespace-nowrap">
-                যোগাযোগ করুন
-              </a>
+              {settings?.website_3 && (
+                <a 
+                  href={settings.website_3} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition-colors shadow-lg shadow-teal-500/20 text-sm sm:text-base whitespace-nowrap flex items-center gap-2"
+                >
+                  <Globe className="w-4 h-4" />
+                  ওয়েবসাইট দেখুন
+                </a>
+              )}
+              {settings?.phone && (
+                <a 
+                  href={`tel:${settings.phone}`} 
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-colors shadow-lg shadow-green-500/20 text-sm sm:text-base whitespace-nowrap flex items-center gap-2"
+                >
+                  <Phone className="w-4 h-4" />
+                  কল করুন
+                </a>
+              )}
+              {settings?.website && (
+                <a 
+                  href={settings.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20 text-sm sm:text-base whitespace-nowrap flex items-center gap-2"
+                >
+                  <Globe className="w-4 h-4" />
+                  ওয়েবসাইট দেখুন
+                </a>
+              )}
+              {settings?.website_2 && (
+                <a 
+                  href={settings.website_2} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-indigo-600 text-white rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20 text-sm sm:text-base whitespace-nowrap flex items-center gap-2"
+                >
+                  <Globe className="w-4 h-4" />
+                  অন্য ওয়েবসাইট
+                </a>
+              )}
+              {settings?.youtube && (
+                <a 
+                  href={settings.youtube} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition-colors shadow-lg shadow-red-500/20 text-sm sm:text-base whitespace-nowrap flex items-center gap-2"
+                >
+                  <Youtube className="w-4 h-4" />
+                  ইউটিউব দেখুন
+                </a>
+              )}
             </div>
           </motion.div>
         </div>

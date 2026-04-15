@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSettings from "./pages/AdminSettings";
 import { WhatsAppButton } from "./components/WhatsAppButton";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
       </Routes>
       <Toaster position="top-right" />
       <WhatsAppButton />
+      <ScrollToTop />
     </Router>
   );
 }

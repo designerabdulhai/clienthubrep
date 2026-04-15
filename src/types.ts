@@ -20,5 +20,8 @@ export interface Settings {
   whatsapp: string;
   facebook: string;
   youtube: string;
+  website: string;
+  website_2: string;
+  website_3: string;
   address: string;
 }
