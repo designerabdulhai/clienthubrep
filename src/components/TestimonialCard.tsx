@@ -8,10 +8,22 @@ import { motion } from "motion/react";
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
+  isExpanded?: boolean;
+  onToggle?: () => void;
 }
 
-export function TestimonialCard({ testimonial }: TestimonialCardProps) {
+export function TestimonialCard({ testimonial, isExpanded: controlledExpanded, onToggle }: TestimonialCardProps) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [localExpanded, setLocalExpanded] = useState(false);
+
+  const isExpanded = controlledExpanded !== undefined ? controlledExpanded : localExpanded;
+  const toggleExpanded = () => {
+    if (onToggle) {
+      onToggle();
+    } else {
+      setLocalExpanded(!localExpanded);
+    }
+  };
 
   const getYoutubeId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
@@ -79,9 +91,19 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
           </CardHeader>
           
           <CardContent className="flex-grow">
-            <p className="text-foreground/90 italic leading-relaxed font-medium">
-              "{testimonial.review_text}"
-            </p>
+            <div className="relative">
+              <p className={`text-foreground/90 italic leading-relaxed font-medium transition-all duration-300 ${!isExpanded ? 'line-clamp-2' : ''}`}>
+                "{testimonial.review_text}"
+              </p>
+              {testimonial.review_text.length > 80 && (
+                <button 
+                  onClick={toggleExpanded}
+                  className="text-secondary text-sm font-bold mt-2 hover:text-secondary/80 transition-colors focus:outline-none"
+                >
+                  {isExpanded ? "See less" : "See more"}
+                </button>
+              )}
+            </div>
           </CardContent>
           
           <CardFooter className="pt-4 border-t border-border/50 bg-muted/30">

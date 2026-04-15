@@ -13,6 +13,7 @@ export default function LandingPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -130,7 +131,12 @@ export default function LandingPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {featuredTestimonials.map((t) => (
-                <TestimonialCard key={t.id} testimonial={t as Testimonial} />
+                <TestimonialCard 
+                  key={t.id} 
+                  testimonial={t as Testimonial} 
+                  isExpanded={expandedId === t.id}
+                  onToggle={() => setExpandedId(expandedId === t.id ? null : t.id)}
+                />
               ))}
             </div>
           </div>
@@ -158,7 +164,12 @@ export default function LandingPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {clientFeedbackTestimonials.map((t) => (
-                <TestimonialCard key={t.id} testimonial={t as Testimonial} />
+                <TestimonialCard 
+                  key={t.id} 
+                  testimonial={t as Testimonial} 
+                  isExpanded={expandedId === t.id}
+                  onToggle={() => setExpandedId(expandedId === t.id ? null : t.id)}
+                />
               ))}
             </div>
           )}
@@ -182,7 +193,12 @@ export default function LandingPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {siteVisitTestimonials.map((t) => (
-                <TestimonialCard key={t.id} testimonial={t as Testimonial} />
+                <TestimonialCard 
+                  key={t.id} 
+                  testimonial={t as Testimonial} 
+                  isExpanded={expandedId === t.id}
+                  onToggle={() => setExpandedId(expandedId === t.id ? null : t.id)}
+                />
               ))}
             </div>
           </div>
