@@ -110,8 +110,15 @@ export function TestimonialCard({ testimonial, isExpanded: controlledExpanded, o
           
           <CardFooter className="pt-4 border-t border-border/50 bg-muted/30">
             <div>
-              <p className="font-bold text-primary dark:text-white">{testimonial.client_name}</p>
-              <p className="text-sm text-muted-foreground font-medium">{testimonial.client_title}</p>
+              {testimonial.client_name && (
+                <p className="font-bold text-primary dark:text-white">{testimonial.client_name}</p>
+              )}
+              {testimonial.client_title && (
+                <p className="text-sm text-muted-foreground font-medium">{testimonial.client_title}</p>
+              )}
+              {!testimonial.client_name && !testimonial.client_title && (
+                <p className="text-sm text-muted-foreground font-medium italic">Anonymous</p>
+              )}
             </div>
           </CardFooter>
         </Card>

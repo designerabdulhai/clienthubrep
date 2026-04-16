@@ -21,8 +21,8 @@ import { toast } from "sonner";
 import { Loader2, Upload } from "lucide-react";
 
 const formSchema = z.object({
-  client_name: z.string().min(2, "Name must be at least 2 characters"),
-  client_title: z.string().min(2, "Title must be at least 2 characters"),
+  client_name: z.string().optional(),
+  client_title: z.string().optional(),
   review_text: z.string().optional(),
   rating: z.number().min(1).max(5),
   is_featured: z.boolean().default(false),
@@ -140,7 +140,7 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
             name="client_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ক্লাইন্টের নাম</FormLabel>
+                <FormLabel>ক্লাইন্টের নাম (ঐচ্ছিক)</FormLabel>
                 <FormControl>
                   <Input placeholder="জন ডো" {...field} />
                 </FormControl>
@@ -153,7 +153,7 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
             name="client_title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>পদবি/পরিচয়</FormLabel>
+                <FormLabel>পদবি/পরিচয় (ঐচ্ছিক)</FormLabel>
                 <FormControl>
                   <Input placeholder="সিইও, টেককর্প" {...field} />
                 </FormControl>

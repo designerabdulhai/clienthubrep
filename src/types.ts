@@ -1,7 +1,7 @@
 export interface Testimonial {
   id: string;
-  client_name: string;
-  client_title: string;
+  client_name: string | null;
+  client_title: string | null;
   review_text: string | null;
   rating: number;
   video_url: string | null;
