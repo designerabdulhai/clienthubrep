@@ -91,19 +91,21 @@ export function TestimonialCard({ testimonial, isExpanded: controlledExpanded, o
           </CardHeader>
           
           <CardContent className="flex-grow">
-            <div className="relative">
-              <p className={`text-foreground/90 italic leading-relaxed font-medium transition-all duration-300 ${!isExpanded ? 'line-clamp-2' : ''}`}>
-                "{testimonial.review_text}"
-              </p>
-              {testimonial.review_text.length > 80 && (
-                <button 
-                  onClick={toggleExpanded}
-                  className="text-secondary text-sm font-bold mt-2 hover:text-secondary/80 transition-colors focus:outline-none"
-                >
-                  {isExpanded ? "See less" : "See more"}
-                </button>
-              )}
-            </div>
+            {testimonial.review_text && (
+              <div className="relative">
+                <p className={`text-foreground/90 italic leading-relaxed font-medium transition-all duration-300 ${!isExpanded ? 'line-clamp-2' : ''}`}>
+                  "{testimonial.review_text}"
+                </p>
+                {testimonial.review_text.length > 80 && (
+                  <button 
+                    onClick={toggleExpanded}
+                    className="text-secondary text-sm font-bold mt-2 hover:text-secondary/80 transition-colors focus:outline-none"
+                  >
+                    {isExpanded ? "See less" : "See more"}
+                  </button>
+                )}
+              </div>
+            )}
           </CardContent>
           
           <CardFooter className="pt-4 border-t border-border/50 bg-muted/30">

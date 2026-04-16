@@ -23,7 +23,7 @@ import { Loader2, Upload } from "lucide-react";
 const formSchema = z.object({
   client_name: z.string().min(2, "Name must be at least 2 characters"),
   client_title: z.string().min(2, "Title must be at least 2 characters"),
-  review_text: z.string().min(10, "Review must be at least 10 characters"),
+  review_text: z.string().optional(),
   rating: z.number().min(1).max(5),
   is_featured: z.boolean().default(false),
   section: z.string().default("client_feedback"),
@@ -168,10 +168,10 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
           name="review_text"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>রিভিউ</FormLabel>
+              <FormLabel>রিভিউ (ঐচ্ছিক)</FormLabel>
               <FormControl>
                 <Textarea 
-                  placeholder="ক্লাইন্ট কী বলেছেন তা এখানে লিখুন..." 
+                  placeholder="ক্লাইন্ট কী বলেছেন তা এখানে লিখুন (যদি থাকে)..." 
                   className="min-h-[120px]"
                   {...field} 
                 />
@@ -214,6 +214,7 @@ export function TestimonialForm({ initialData, onSuccess }: TestimonialFormProps
                   >
                     <option value="client_feedback">Client Feedback</option>
                     <option value="site_visit">Site Visit and Supervision</option>
+                    <option value="completed_house">আমাদের ডিজাইনে কমপ্লিট করা বাড়ি</option>
                   </select>
                 </FormControl>
                 <FormMessage />

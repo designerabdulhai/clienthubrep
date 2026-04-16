@@ -161,7 +161,7 @@ export default function AdminTestimonials() {
                     </TableCell>
                     <TableCell>
                       <div className="text-xs font-medium text-primary">
-                        {t.section === 'site_visit' ? 'Site Visit' : 'Client Feedback'}
+                        {t.section === 'site_visit' ? 'Site Visit' : t.section === 'completed_house' ? 'Completed House' : 'Client Feedback'}
                       </div>
                     </TableCell>
                     <TableCell className="text-xs text-muted-foreground">

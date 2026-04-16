@@ -53,6 +53,7 @@ export default function LandingPage() {
   const featuredTestimonials = testimonials.filter(t => t.is_featured);
   const clientFeedbackTestimonials = testimonials.filter(t => !t.is_featured && (t.section === 'client_feedback' || !t.section));
   const siteVisitTestimonials = testimonials.filter(t => !t.is_featured && t.section === 'site_visit');
+  const completedHouseTestimonials = testimonials.filter(t => !t.is_featured && t.section === 'completed_house');
 
   return (
     <div className="min-h-screen bg-background">
@@ -254,6 +255,29 @@ export default function LandingPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {siteVisitTestimonials.map((t) => (
+                <TestimonialCard 
+                  key={t.id} 
+                  testimonial={t as Testimonial} 
+                  isExpanded={expandedId === t.id}
+                  onToggle={() => setExpandedId(expandedId === t.id ? null : t.id)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Completed House Section */}
+      {!loading && completedHouseTestimonials.length > 0 && (
+        <section id="completed-house" className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl font-bold text-primary mb-4">আমাদের ডিজাইনে কমপ্লিট করা বাড়ি</h2>
+              <p className="text-muted-foreground">আমাদের করা কিছু প্রজেক্টের বাস্তব চিত্র এবং রিভিউ।</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {completedHouseTestimonials.map((t) => (
                 <TestimonialCard 
                   key={t.id} 
                   testimonial={t as Testimonial} 
